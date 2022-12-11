@@ -8,8 +8,12 @@ const childsBackground = background.querySelectorAll('a')
 
 function deactiveElement (elements, classActiv) {
     const listElements = Array.from(elements)
-    let index = listElements.indexOf(document.querySelector(`.${classActiv}`))
-    elements[index].classList.remove(classActiv)
+    const parent = elements[0].closest('.book__control')
+    
+    let index = listElements.indexOf(parent.querySelector(`.${classActiv}`))
+    if (index != -1) {
+        elements[index].classList.remove(classActiv)
+    }
 }
 
 function activeElement (element, classActiv) {
@@ -81,6 +85,7 @@ childsBackground.forEach(function(background) {
     background.addEventListener('click', (event) => {
         deactiveElement (childsBackground, 'color_active')
         activeElement (background, 'color_active')
+        console.log(childsBackground)
         event.preventDefault();
     }, false)
 })
